@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ message }}
+ <section>
+        <div class="row">
+            <table class="table table-hover table-bordered text-center">
+                <tr class="text-center" style="font-weight: 700;">
+                    <td>State</td>
+                    <td>City</td>
+                    <td>Data</td>
+                    <td>Status</td>
+                    <td>Buy</td>
+                </tr>
+
+                    {% for elem in result_list %}
+                    <tr>
+                        <td>{{ elem.state }}</td>
+                        <td>{{ elem.city }}</td>
+                        <td>{{ elem.data }}</td>
+                        <td>{{ elem.status }}</td>
+                        <td>
+                            {% if elem in user.profile.ebooks.all %}
+                            <!-- add a button here to see the product -->
+                            You own this
+                            {% elif elem in current_order_products %}
+                            <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning">Go to Cart</a>
+                            {% else %}
+                            <a href="{% url 'shopping_cart:add_to_cart' elem.id %}" class="btn btn-warning">Add to Cart</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% if empty %}
+    <div class="right_block">
+        <div class="title_right_block">
+            <h1>{{empty}}</h1>
+        </div>
+    </div>
+    {% endif %}
+</div>
+ </section>
+
+{% endblock content %}
