@@ -13,7 +13,7 @@ class OrderItem(models.Model):
     date_ordered = models.DateTimeField(null=True)
 
     def __str__(self):
-        return self.product.number_track
+        return '{0}'.format(self.id)
 
 
 class Order(models.Model):

@@ -11,7 +11,6 @@
         <th>City</th>
         <th>Date</th>
         <th>Status</th>
-        <th>Track</th>
         <th>Price</th>
       </tr>
       {% for item in order.get_cart_items %}
@@ -20,9 +19,8 @@
           <td>{{ item.product.state }}</td>
           <td>{{ item.product.city }}</td>
           <td>{{ item.product.data }}</td>
-          <td>{{ item.product.status }}</td>
           <td>
-            {{ item.product.number_track }}
+            {{ item.product.status }}
             <span class="pull-right">
               <a href="{% url 'shopping_cart:delete_item' item.id %}" data-balloon="remove this item from cart" class="text-danger" onclick="return confirm_delete();">
                 <i class="fas fa-trash"></i>
@@ -38,7 +36,7 @@
       {% endfor %}
       <tr>
         {% if order.get_cart_total != None %}
-        <td colspan=6>
+        <td colspan=5>
           <strong class="pull-right">Order Total:</strong>
         </td>
         

@@ -178,6 +178,26 @@ def balance(request):
         messages.info(request, "Not enough!")
         return render(request, 'shopping_cart/order_summary.html', context)
     Profile.objects.filter(user=request.user).update(balance=user_balance)
-    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
-    filtered_orders.update(owner=None)
+    # get the order being processed
+    order_to_purchase = get_user_pending_order(request)
+
+    # update the placed order
+    order_to_purchase.is_ordered = True
+    order_to_purchase.date_ordered = datetime.datetime.now()
+    order_to_purchase.save()
+
+    # get all items in the order - generates a queryset
+    order_items = order_to_purchase.items.all()
+
+    # update order items
+    order_items.update(is_ordered=True, date_ordered=datetime.datetime.now())
+
+    # Add products to user profile
+    user_profile = get_object_or_404(Profile, user=request.user)
+    # get the products from the items
+    order_products = [item.product for item in order_items]
+    user_profile.ebooks.add(*order_products)
+    user_profile.save()
+
+
     return render(request, 'shopping_cart/purchase_success.html', {})

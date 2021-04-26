@@ -4,23 +4,20 @@
 
 <table class="table table-hover table-bordered text-center">
       <tr class="text-center">
-        <th>Date Ordered</th>
-        <th>Reference Code</th>
-        <th>Items</th>
-        <th>Price</th>
+        <th>Date ordered</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Track</th>
       </tr>
       {% for order in my_orders %}
+        {% for item in order.items.all %}
         <tr>
           <td>{{ order.date_ordered }}</td>
-          <td>{{ order.ref_code }}</td>
-          <td>
-        	{% for item in order.items.all %}
-        		{{ item.product.number_track }}
-      		{% endfor %}
-      	  </td>
-          <td>${{ order.get_cart_total }}</td>
-
+          <td>{{ item.product.state }}</td>
+          <td>{{ item.product.city }}</td>
+          <td>{{ item.product.number_track }}</td>
         </tr>
+        {% endfor %}
       {% empty %}
         <tr>
           <td colspan= 4> You have no orders.</td>
