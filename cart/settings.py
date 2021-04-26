@@ -13,7 +13,7 @@ SECRET_KEY = ')o-g4bbm7sh%e$jjrn*$v1f)m^-2l8ok!m+(0@2-^+&1s0*dwz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SEND_GRID_API_KEY = ''
 EMAIL_HOST = 'smtp.sendgrid.net'
@@ -136,6 +136,11 @@ STATICFILES_DIRS = [
 VENV_PATH = os.path.dirname(BASE_DIR)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
 
 MEDIA_URL = '/media/'
 
