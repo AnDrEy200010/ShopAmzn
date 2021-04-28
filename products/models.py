@@ -15,3 +15,9 @@ class Product(models.Model):
     def __str__(self):
         return self.number_track
 
+
+
+class News(models.Model):
+    date = models.DateField(auto_now=False, verbose_name='Дата')
+    title = models.CharField(max_length=50, verbose_name='Название')
+    description = models.CharField(max_length=1000, verbose_name='Содержание')

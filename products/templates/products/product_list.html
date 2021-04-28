@@ -2,7 +2,9 @@
 
 {% block content %}
     {{ message }}
- <section>
+
+
+ <section style="width:80%;">
         <div class="row">
             <table class="table table-hover table-bordered text-center">
                 <tr class="text-center" style="font-weight: 700;">
@@ -35,5 +37,23 @@
             </table>
 </div>
  </section>
+
+<div class="list-group" style="width:20%; position:absolute; top: 18%; right: 0;">
+    {% for news in news_list %}
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{news.title}}</h5>
+      <small>{{news.date}}</small>
+    </div>
+    <p class="mb-1">{{news.description}}</p>
+  </a>
+    {% empty %}
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Any news</h5>
+    </div>
+  </a>
+    {% endfor %}
+</div>
 
 {% endblock content %}
