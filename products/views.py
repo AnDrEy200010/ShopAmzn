@@ -61,14 +61,18 @@ def downfile(request):
         io_string = io.StringIO(data_set)
         next(io_string)
         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-            _, created = Product.objects.update_or_create(
-                state=column[0],
-                city=column[1],
-                data=column[3],
-                status=column[4],
-                number_track=column[2],
-                price=column[5]
-            )
+            try:
+                _, created = Product.objects.update_or_create(
+                    state=column[0],
+                    city=column[1],
+                    data=column[3],
+                    status=column[4],
+                    number_track=column[2],
+                    price=column[5]
+                )
+            except Exception:
+                continue
+
         # with open(os.path.abspath(upload.name), newline='') as f:
         #     reader = csv.reader(f)
         #     for row in reader:
