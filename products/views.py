@@ -6,7 +6,8 @@ from .models import Product, News
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 import xml.etree.ElementTree as ET
-
+import csv
+import io
 
 
 @login_required
@@ -56,16 +57,29 @@ def downfile(request):
         return HttpResponseRedirect('/products/')
     if request.method == 'POST':
         upload = request.FILES['file']
-        tree = ET.parse(upload)
-        root = tree.getroot()
-        for product in root:
-            state = product.find('state').text
-            city = product.find('city').text
-            data = product.find('data').text
-            status = product.find('status').text
-            number_track = product.find('number_track').text
-            price = product.find('price').text
-            Product.objects.create(state=state, city=city, data=data, status=status, number_track=number_track, price=price)
+        data_set = upload.read().decode('UTF-8')
+        io_string = io.StringIO(data_set)
+        next(io_string)
+        for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+            _, created = Product.objects.update_or_create(
+                state=column[0],
+                city=column[1],
+                data=column[3],
+                status=column[4],
+                number_track=column[2],
+                price=column[5]
+            )
+        # with open(os.path.abspath(upload.name), newline='') as f:
+        #     reader = csv.reader(f)
+        #     for row in reader:
+        #         array = row.split(',')
+        #         state = array[0].text
+        #         city = array[1].text
+        #         data = array[3].text
+        #         status = array[4].text
+        #         number_track = array[2].text
+        #         price = array[5].text
+        #         Product.objects.create(state=state, city=city, data=data, status=status, number_track=number_track, price=price)
         return HttpResponseRedirect('/admin/')
     else:
         context = {}

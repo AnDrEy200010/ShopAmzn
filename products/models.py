@@ -16,7 +16,6 @@ class Product(models.Model):
         return self.number_track
 
 
-
 class News(models.Model):
     date = models.DateField(auto_now=False, verbose_name='Дата')
     title = models.CharField(max_length=50, verbose_name='Название')
