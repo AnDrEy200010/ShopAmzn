@@ -6,6 +6,7 @@
         <div class="row">
             <table class="table table-hover table-bordered text-center">
                 <tr class="text-center" style="font-weight: 700;">
+                    <td>Country</td>
                     <td>State</td>
                     <td>City</td>
                     <td>Data</td>
@@ -15,6 +16,7 @@
 
                     {% for elem in result_list %}
                     <tr>
+                        <td>{{ elem.country }}</td>
                         <td>{{ elem.state }}</td>
                         <td>{{ elem.city }}</td>
                         <td>{{ elem.data }}</td>

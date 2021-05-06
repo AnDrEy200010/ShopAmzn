@@ -44,11 +44,7 @@
     <nav class="">
     {% if user.is_authenticated %}
 
-        <form method="POST" action="{% url 'products:search' %}"  class="search-form">
-            {% csrf_token %}
-                <input name="search" type="text" class="search_input" placeholder="Search for Equipment...">
-                <input type="submit" value="search">
-        </form>
+
         <div class="balance">
             <p>Balance: {{ request.user.profile.balance }}</p>
         </div>

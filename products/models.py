@@ -5,6 +5,7 @@ from django.db import models
 
 
 class Product(models.Model):
+    country = models.CharField(max_length=50, verbose_name='Страна')
     state = models.CharField(max_length=50, verbose_name='Штат')
     city = models.CharField(max_length=50, verbose_name='Город')
     data = models.DateField(auto_now=False, verbose_name='Дата')

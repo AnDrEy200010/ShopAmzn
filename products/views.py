@@ -33,8 +33,10 @@ def product_list(request):
 
 @login_required
 def search(request):
-    query = request.POST['search']
-    result_list = Product.objects.filter(Q(city__contains=query) | Q(state__contains=query))
+    country = request.POST['country']
+    state = request.POST['state']
+    city = request.POST['city']
+    result_list = Product.objects.filter(country__contains=country, state__contains=state, city__contains=city)
     filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
     current_order_products = []
     if filtered_orders.exists():
@@ -43,7 +45,9 @@ def search(request):
         current_order_products = [product.product for product in user_order_items]
 
     context = {
-        'query': query,
+        'country': country,
+        'state': state,
+        'city': city,
         'result_list': result_list,
         'current_order_products': current_order_products
     }
@@ -63,12 +67,13 @@ def downfile(request):
         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
             try:
                 _, created = Product.objects.update_or_create(
-                    state=column[0],
-                    city=column[1],
+                    country=column[0],
+                    state=column[1],
+                    city=column[2],
                     data=column[3],
                     status=column[4],
-                    number_track=column[2],
-                    price=column[5]
+                    number_track=column[5],
+                    price=column[6]
                 )
             except Exception:
                 continue

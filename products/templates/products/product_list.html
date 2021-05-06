@@ -3,11 +3,41 @@
 {% block content %}
     {{ message }}
 
+<div class="list-group">
+    {% for news in news_list %}
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{news.title}}</h5>
+      <small>{{news.date}}</small>
+    </div>
+    <p class="mb-1">{{news.description}}</p>
+  </a>
+    {% empty %}
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Any news</h5>
+    </div>
+  </a>
+    {% endfor %}
+</div>
+<div class="seaching_form" style="padding-top: 80px;">
+    <form method="POST" action="{% url 'products:search' %}"  class="search-form" style="display:contents;">
+        {% csrf_token %}
+        <input name="country" type="text" class="search_input" placeholder="Search for Country...">
 
+
+        <input name="state" type="text" class="search_input" placeholder="Search for State...">
+
+
+        <input name="city" type="text" class="search_input" placeholder="Search for City...">
+        <input type="submit" value="search">
+    </form>
+</div>
  <section style="width:80%;">
-        <div class="row">
+        <div class="row" style="margin-left: 0px;">
             <table class="table table-hover table-bordered text-center">
                 <tr class="text-center" style="font-weight: 700;">
+                    <td>Country</td>
                     <td>State</td>
                     <td>City</td>
                     <td>Data</td>
@@ -17,6 +47,7 @@
 
                     {% for object in object_list %}
                     <tr>
+                        <td>{{ object.country }}</td>
                         <td>{{ object.state }}</td>
                         <td>{{ object.city }}</td>
                         <td>{{ object.data }}</td>
@@ -38,22 +69,6 @@
 </div>
  </section>
 
-<div class="list-group" style="width:20%; position:absolute; top: 18%; right: 0;">
-    {% for news in news_list %}
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{news.title}}</h5>
-      <small>{{news.date}}</small>
-    </div>
-    <p class="mb-1">{{news.description}}</p>
-  </a>
-    {% empty %}
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Any news</h5>
-    </div>
-  </a>
-    {% endfor %}
-</div>
+
 
 {% endblock content %}

@@ -5,6 +5,7 @@
 <table class="table table-hover table-bordered text-center">
       <tr class="text-center">
         <th>Date ordered</th>
+          <th>Country</th>
         <th>State</th>
         <th>City</th>
         <th>Track</th>
@@ -13,6 +14,7 @@
         {% for item in order.items.all %}
         <tr>
           <td>{{ order.date_ordered }}</td>
+          <td>{{ item.product.country }}</td>
           <td>{{ item.product.state }}</td>
           <td>{{ item.product.city }}</td>
           <td>{{ item.product.number_track }}</td>
@@ -20,12 +22,12 @@
         {% endfor %}
       {% empty %}
         <tr>
-          <td colspan= 4> You have no orders.</td>
+          <td colspan= 5> You have no orders.</td>
         </tr>
       {% endfor %}
 
       <tr>
-        <td colspan=4>
+        <td colspan=5>
           <a href="{% url 'products:product-list' %}" class="btn btn-warning pull-left">
             {% if not order %}Continue Shopping{% else %}Add Items to Cart {% endif %}
           </a> 
