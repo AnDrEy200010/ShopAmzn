@@ -8,7 +8,7 @@ class Product(models.Model):
     country = models.CharField(max_length=50, verbose_name='Страна')
     state = models.CharField(max_length=50, verbose_name='Штат')
     city = models.CharField(max_length=50, verbose_name='Город')
-    data = models.DateTimeField(auto_now=False, verbose_name='Дата')
+    data = models.CharField(max_length=100, verbose_name='Дата')
     status = models.CharField(max_length=50, verbose_name='Статус')
     number_track = models.CharField(max_length=50, verbose_name='Номер трека')
     price = models.IntegerField()
