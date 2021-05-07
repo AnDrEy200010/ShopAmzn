@@ -67,12 +67,12 @@ def downfile(request):
         for column in csv.reader(io_string, delimiter=',', quotechar="|"):
             try:
                 _, created = Product.objects.update_or_create(
-                    country=column[0],
-                    state=column[1],
-                    city=column[2],
-                    data=column[3],
-                    status=column[4],
-                    number_track=column[5],
+                    country=column[1],
+                    state=column[2],
+                    city=column[0],
+                    data=column[4],
+                    status=column[5],
+                    number_track=column[3],
                     price=column[6]
                 )
             except Exception:
