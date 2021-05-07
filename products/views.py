@@ -4,6 +4,7 @@ from django.shortcuts import render
 from shopping_cart.models import Order
 from .models import Product, News
 from django.db.models import Q
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 import xml.etree.ElementTree as ET
 import csv
@@ -16,6 +17,9 @@ def product_list(request):
     filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
     current_order_products = []
     news_list = News.objects.filter().order_by('-date')[:3]
+    paginator = Paginator(object_list, 200)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     if filtered_orders.exists():
     	user_order = filtered_orders[0]
@@ -23,6 +27,7 @@ def product_list(request):
     	current_order_products = [product.product for product in user_order_items]
 
     context = {
+        'page_obj': page_obj,
         'object_list': object_list,
         'current_order_products': current_order_products,
         'news_list': news_list,

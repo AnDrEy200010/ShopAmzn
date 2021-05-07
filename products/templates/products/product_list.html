@@ -3,10 +3,10 @@
 {% block content %}
     {{ message }}
 
-<div class="list-group">
+<div class="list-group" style="padding:20px 28px 0 0;">
     {% for news in news_list %}
   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
-    <div class="d-flex w-100 justify-content-between">
+    <div class="d-flex w-100 justify-content-between" >
       <h5 class="mb-1">{{news.title}}</h5>
       <small>{{news.date}}</small>
     </div>
@@ -35,17 +35,17 @@
 </div>
  <section style="width:80%;">
         <div class="row" style="margin-left: 0px;">
-            <table class="table table-hover table-bordered text-center">
+            <table class="table table-hover table-bordered text-center" style="width:1080px;">
                 <tr class="text-center" style="font-weight: 700;">
                     <td>Country</td>
                     <td>State</td>
-                    <td>City</td>
-                    <td>Data</td>
+                    <td style="width:160px;">City</td>
+                    <td style="width:220px;">Data</td>
                     <td>Status</td>
                     <td>Buy</td>
                 </tr>
 
-                    {% for object in object_list %}
+                    {% for object in page_obj.object_list %}
                     <tr>
                         <td>{{ object.country }}</td>
                         <td>{{ object.state }}</td>
@@ -66,6 +66,65 @@
                     {% endfor %}
 
             </table>
+            {% if page_obj.paginator.num_pages > 1 %}
+<div>
+<div class="pagination:container">
+{% if page_obj.has_previous %}
+<a href="?page={{ page_obj.previous_page_number  }}">
+  <div class="pagination:number arrow pressable">
+    <svg width="18" height="18">
+      <use xlink:href="#left" />
+    </svg>
+  </div>
+</a>
+{% endif %}
+
+<a href="?page=1">
+  <div class="pagination:number pressable {% if  page_obj.number == 1 %} selected {% endif %}">
+    1
+  </div>
+</a>
+
+<a href="?page=2">
+  <div class="pagination:number pressable {% if  page_obj.number == 2 %} selected {% endif %}">
+    2
+  </div>
+</a>
+
+{% if page_obj.number != 1 and page_obj.number != 2 %}
+<a href="?page={{ page_obj.number }}">
+  <div class="pagination:number pressable selected">
+    {{ page_obj.number }}
+  </div>
+</a>
+{% endif %}
+
+{% if page_obj.number != page_obj.paginator.num_pages and page_obj.paginator.num_pages > 2 %}
+<a href="?page={{ page_obj.paginator.num_pages }}">
+  <div class="pagination:number pressable">
+    {{ page_obj.paginator.num_pages }}
+  </div>
+</a>
+{% endif %}
+
+
+{% if page_obj.has_next  %}
+<a href="?page={{ page_obj.next_page_number   }}">
+  <div class="pagination:number arrow pressable">
+    <svg width="18" height="18">
+      <use xlink:href="#right" />
+    </svg>
+  </div>
+</a>
+{% endif %}
+</div>
+
+<svg class="hide">
+  <symbol id="left" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></symbol>
+  <symbol id="right" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></symbol>
+</svg>
+</div>
+{% endif%}
 </div>
  </section>
 
