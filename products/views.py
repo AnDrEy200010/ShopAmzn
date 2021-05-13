@@ -81,7 +81,8 @@ def downfile(request):
                     price=column[6]
                 )
             except Exception:
-                continue
+                return render(request, Exception)
+                continu
 
         # with open(os.path.abspath(upload.name), newline='') as f:
         #     reader = csv.reader(f)
