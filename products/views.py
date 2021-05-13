@@ -17,7 +17,7 @@ def product_list(request):
     filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
     current_order_products = []
     news_list = News.objects.filter().order_by('-date')[:3]
-    paginator = Paginator(object_list, 200)
+    paginator = Paginator(object_list, 50)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -41,7 +41,8 @@ def search(request):
     country = request.POST['country']
     state = request.POST['state']
     city = request.POST['city']
-    result_list = Product.objects.filter(country__contains=country, state__contains=state, city__contains=city)
+    data = request.POST['data']
+    result_list = Product.objects.filter(country__contains=country, state__contains=state, city__contains=city, data__contains=data)
     filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
     current_order_products = []
     if filtered_orders.exists():
@@ -50,6 +51,7 @@ def search(request):
         current_order_products = [product.product for product in user_order_items]
 
     context = {
+        'data' : data,
         'country': country,
         'state': state,
         'city': city,

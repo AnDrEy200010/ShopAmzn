@@ -14,7 +14,7 @@ class Product(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return self.number_track
+        return self.data
 
 
 class News(models.Model):
