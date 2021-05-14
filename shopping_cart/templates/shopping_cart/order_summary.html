@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="seaching_form" style="padding-top: 80px;">
+    <form method="POST" action="{% url 'products:search' %}"  class="search-form" style="display:contents;">
+        {% csrf_token %}
+        <input name="country" type="text" class="search_input" placeholder="Search for Country...">
 
+
+        <input name="state" type="text" class="search_input" placeholder="Search for State...">
+
+
+        <input name="city" type="text" class="search_input" placeholder="Search for City...">
+        <input name="data" type="text" class="search_input" placeholder="Search for Data...">
+        <input type="submit" value="search">
+    </form>
+</div>
  <section>
    <div class="row">
     <table class="table table-hover table-bordered text-center">
