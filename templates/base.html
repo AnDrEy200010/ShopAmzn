@@ -200,13 +200,14 @@
             </form>
 
             <a href="{% url 'accounts:my_profile' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Your Purchases</a>
-
             <div class="balance">
                 <p>Balance: {{ request.user.profile.balance }}</p>
             </div>
 
+            <a href="https://t.me/amazonbelarus" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Top up balance</a>
 
-                <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Go to Cart</a>
+
+            <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Go to Cart</a>
 
 
 
