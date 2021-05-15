@@ -178,6 +178,7 @@
             float:right;
              margin:10px;
         }
+
     </style>
 </head>
 <body>
@@ -203,6 +204,10 @@
             <div class="balance">
                 <p>Balance: {{ request.user.profile.balance }}</p>
             </div>
+
+
+                <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Go to Cart</a>
+
 
 
         </div>
