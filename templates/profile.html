@@ -9,6 +9,8 @@
         <th>State</th>
         <th>City</th>
         <th>Track</th>
+        <th>Check</th>
+
       </tr>
       {% for order in my_orders %}
         {% for item in order.items.all %}
@@ -18,16 +20,19 @@
           <td>{{ item.product.state }}</td>
           <td>{{ item.product.city }}</td>
           <td>{{ item.product.number_track }}</td>
+          <td><a href="https://www.fedex.com/fedextrack/?trknbr={{ item.product.number_track }}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Check</a></td>
+<!--            <input type="text" value="{{ item.product.number_track }}" id="myInput"><button onclick="myFunction('#myInput')">Copy text</button>-->
+
         </tr>
         {% endfor %}
       {% empty %}
         <tr>
-          <td colspan= 5> You have no orders.</td>
+          <td colspan= 6> You have no orders.</td>
         </tr>
       {% endfor %}
 
       <tr>
-        <td colspan=5>
+        <td colspan=6>
           <a href="{% url 'products:product-list' %}" class="btn btn-warning pull-left">
             {% if not order %}Continue Shopping{% else %}Add Items to Cart {% endif %}
           </a> 

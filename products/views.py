@@ -51,7 +51,8 @@ def search(request):
         current_order_products = [product.product for product in user_order_items]
 
     context = {
-        'data' : data,
+        'empty': 'Check the Spelling',
+        'data': data,
         'country': country,
         'state': state,
         'city': city,
