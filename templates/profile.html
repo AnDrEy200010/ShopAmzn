@@ -2,8 +2,10 @@
 
 {% block content %}
 
-<table class="table table-hover table-bordered text-center">
-      <tr class="text-center">
+<table id="table-id" class="table table-hover table-bordered text-center">
+    <thead>
+    <tr class="text-center">
+
         <th>Date ordered</th>
           <th>Country</th>
         <th>State</th>
@@ -12,6 +14,7 @@
         <th>Check</th>
 
       </tr>
+        </thead>
       {% for order in my_orders %}
         {% for item in order.items.all %}
         <tr>
@@ -30,7 +33,7 @@
           <td colspan= 6> You have no orders.</td>
         </tr>
       {% endfor %}
-
+        <thead>
       <tr>
         <td colspan=6>
           <a href="{% url 'products:product-list' %}" class="btn btn-warning pull-left">
@@ -38,6 +41,7 @@
           </a> 
         </td>
       </tr>
+    </thead>
     </table>
 
 {% endblock content %}
