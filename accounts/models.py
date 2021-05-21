@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 
 from products.models import Product
 
+
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY

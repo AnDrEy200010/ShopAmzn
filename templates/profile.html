@@ -22,9 +22,12 @@
           <td>{{ item.product.country }}</td>
           <td>{{ item.product.state }}</td>
           <td>{{ item.product.city }}</td>
-          <td>{{ item.product.number_track }}</td>
-          <td><a href="https://www.fedex.com/fedextrack/?trknbr={{ item.product.number_track }}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Check</a></td>
-<!--            <input type="text" value="{{ item.product.number_track }}" id="myInput"><button onclick="myFunction('#myInput')">Copy text</button>-->
+          <td>{{ item.product.number_track }}
+              <a href="{% url 'accounts:copy_item' item.id %}" data-balloon="remove this item from cart" class="text-danger" onclick="return confirm_copy();">
+                <i class="fas fa-copy"></i>
+              </a>
+          </td>
+          <td><a href="https://www.fedex.com/fedextrack/?trknbr={{ item.product.number_track }}" target="_blank" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Check</a></td>
 
         </tr>
         {% endfor %}

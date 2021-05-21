@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="shortcut icon" href="{% static '/images/new.png'%}" type="image/png">
     {% block head %}
 
     {% endblock head %}
@@ -235,16 +235,21 @@
                 <input type="submit" value="logout" style="padding: 7px 7px 10px 7px;">
             </form>
 
-            <a href="{% url 'accounts:my_profile' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Your Purchases</a>
-            <div class="balance">
-                <p>Balance: {{ request.user.profile.balance }}</p>
-            </div>
 
-            <a href="https://t.me/amazonbelarus" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Top up balance</a>
+            <a href="{% url 'accounts:my_profile' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Your Purchases</a>
+
+
+
+
 
 
             <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Go to Cart</a>
 
+            <a href="https://t.me/amazonbelarus" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Top up balance</a>
+
+
+
+  <a href="#!" class="btn btn-warning" style="float:right; margin:18px;background-color:white;">Balance: {{ request.user.profile.balance }}</a>
 
 
         </div>
@@ -268,26 +273,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.0.2/tablesort.min.js'></script>
+<script src="https://kit.fontawesome.com/6be488ea4d.js" crossorigin="anonymous"></script>
 
 
 
 <script>
   new Tablesort(document.getElementById('table-id'));
 </script>
-<!--<script >-->
-<!-- function myFunction(myInput) {-->
-<!--  /* Get the text field */-->
-<!--  var copyText = document.getElementById("myInput");-->
 
-<!--  /* Select the text field */-->
-<!--  copyText.select();-->
-
-<!--  /* Copy the text inside the text field */-->
-<!--  document.execCommand("copy");-->
-
-<!--  /* Alert the copied text */-->
-<!--  alert("Copied the text: " + copyText.value);-->
-<!--}-->
-<!--</script>-->
 </body>
 </html>
